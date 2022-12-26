@@ -42,7 +42,6 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
         if (value.length == 3) {
           for (var country in countries) {
             if (value.contains(country.phoneCode)) {
-              print("mask  ${country.mask}");
               formatter = MaskedTextInputFormatter(
                 mask: country.mask
                     .replaceAll("{", "")
@@ -58,7 +57,6 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
         if (value.length == 4) {
           for (var country in countries) {
             if (value.contains(country.phoneCode)) {
-              print("mask  ${country.mask}");
               formatter = MaskedTextInputFormatter(
                 mask: country.mask
                     .replaceAll("{", "")
@@ -71,13 +69,9 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
             }
           }
         }
-
-        print(value);
       },
       inputFormatters: [
         if (formatter != null) formatter!,
-
-        // MaskedTextInputFormatter(mask: "+000 00 000 00 00", separator: " ")
       ],
       decoration: InputDecoration(
         labelText: 'Phone Number',
@@ -93,35 +87,6 @@ class _PhoneNumberWidgetState extends State<PhoneNumberWidget> {
                 height: 32,
               )
             : null,
-        // suffixIcon: DropdownButton<Country>(
-        //   underline: const SizedBox(),
-        //   icon: const Icon(Icons.arrow_drop_down),
-        //   iconSize: 24,
-        //   elevation: 16,
-        //   style: const TextStyle(color: Colors.deepPurple),
-        //   onChanged: (Country? newValue) {
-        //     setState(() {
-        //       _controller.text = newValue!.phoneCode;
-        //     });
-        //   },
-        //   items: countries.map<DropdownMenuItem<Country>>((Country value) {
-        //     return DropdownMenuItem<Country>(
-        //       value: value,
-        //       child: Row(
-        //         children: [
-        //           Image.asset(
-        //             "assets/flags/${value.code.toLowerCase()}.png",
-        //             package: 'udevs_phone_number',
-        //             width: 32,
-        //             height: 32,
-        //           ),
-        //           const SizedBox(width: 8),
-        //           Text(value.name),
-        //         ],
-        //       ),
-        //     );
-        //   }).toList(),
-        // ),
       ),
     );
   }
