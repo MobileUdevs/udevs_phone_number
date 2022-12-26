@@ -19,7 +19,7 @@ class UdevsPhoneNumberWeb extends UdevsPhoneNumberPlatform {
 
   /// Returns a [String] containing the version of the platform.
   @override
-  Future<String?> getPlatformVersion() async {
+  Future<String?> getPhoneNumber() async {
     final version = html.window.navigator.userAgent;
     return version;
   }

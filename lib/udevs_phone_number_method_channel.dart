@@ -10,8 +10,8 @@ class MethodChannelUdevsPhoneNumber extends UdevsPhoneNumberPlatform {
   final methodChannel = const MethodChannel('udevs_phone_number');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+  Future<String?> getPhoneNumber() async {
+    final version = await methodChannel.invokeMethod<String>('getPhoneNumber');
     return version;
   }
 }

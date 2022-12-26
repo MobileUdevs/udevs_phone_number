@@ -23,7 +23,7 @@ abstract class UdevsPhoneNumberPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
+  Future<String?> getPhoneNumber() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }

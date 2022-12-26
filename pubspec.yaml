@@ -1,7 +1,7 @@
 name: udevs_phone_number
 description: A new Flutter package.
 version: 0.0.1
-homepage:
+homepage: https://github.com/MobileUdevs/udevs_phone_number.git
 
 environment:
   sdk: '>=2.18.6 <3.0.0'

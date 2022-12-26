@@ -9,7 +9,7 @@ class MockUdevsPhoneNumberPlatform
     implements UdevsPhoneNumberPlatform {
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<String?> getPhoneNumber() => Future.value('42');
 }
 
 void main() {
@@ -24,6 +24,6 @@ void main() {
     MockUdevsPhoneNumberPlatform fakePlatform = MockUdevsPhoneNumberPlatform();
     UdevsPhoneNumberPlatform.instance = fakePlatform;
 
-    expect(await udevsPhoneNumberPlugin.getPlatformVersion(), '42');
+    expect(await udevsPhoneNumberPlugin.getPhoneNumber(), '42');
   });
 }
