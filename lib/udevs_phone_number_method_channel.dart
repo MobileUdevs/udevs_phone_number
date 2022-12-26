@@ -14,4 +14,17 @@ class MethodChannelUdevsPhoneNumber extends UdevsPhoneNumberPlatform {
     final version = await methodChannel.invokeMethod<String>('getPhoneNumber');
     return version;
   }
+
+  @override
+  Future<bool> hasPhonePermission() async {
+    final version =
+        await methodChannel.invokeMethod<bool>('hasPhonePermission');
+    return version ?? false;
+  }
+
+  @override
+  Future<void> requestPhonePermission() async {
+    await methodChannel.invokeMethod<void>('requestPhonePermission');
+    return;
+  }
 }

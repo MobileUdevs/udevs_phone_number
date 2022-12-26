@@ -26,4 +26,12 @@ abstract class UdevsPhoneNumberPlatform extends PlatformInterface {
   Future<String?> getPhoneNumber() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<bool> hasPhonePermission() {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<void> requestPhonePermission() {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
 }

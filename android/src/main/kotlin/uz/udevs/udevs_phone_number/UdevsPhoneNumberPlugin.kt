@@ -20,10 +20,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 
 /** UdevsPhoneNumberPlugin */
 class UdevsPhoneNumberPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
-    /// The MethodChannel that will the communication between Flutter and native Android
-    ///
-    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-    /// when the Flutter Engine is detached from the Activity
+
     private val MY_PERMISSIONS_REQUEST_READ_PHONE_STATE: Int = 0
     private lateinit var channel: MethodChannel
     private var mAppContext: Context? = null
@@ -37,20 +34,17 @@ class UdevsPhoneNumberPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
     @SuppressLint("HardwareIds")
     override fun onMethodCall(call: MethodCall, result: Result) {
-        if (call.method == "getPhoneNumber") {
+        if (call.method == "hasPhonePermission") {
+            result.success(hasPhonePermission())
+        } else if (call.method == "requestPhonePermission") {
+            result.success(requestPhonePermission())
+        } else if (call.method == "getPhoneNumber") {
             if (hasPhonePermission()) {
                 val mPhoneNumber =
                     (activity!!.getSystemService(Context.TELEPHONY_SERVICE) as android.telephony.TelephonyManager).line1Number
                 result.success(mPhoneNumber)
             } else {
-                requestPhonePermission()
-                if (hasPhonePermission()) {
-                    val mPhoneNumber =
-                        (activity!!.getSystemService(Context.TELEPHONY_SERVICE) as android.telephony.TelephonyManager).line1Number
-                    result.success(mPhoneNumber)
-                } else {
-                    result.success("Permission denied")
-                }
+                result.success(null)
             }
         } else {
             result.notImplemented()
@@ -118,15 +112,6 @@ class UdevsPhoneNumberPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                     MY_PERMISSIONS_REQUEST_READ_PHONE_STATE
                 )
             }
-        }
-    }
-
-    private fun getMobileNumber() {
-        if (!hasPhonePermission()) {
-            requestPhonePermission()
-        } else {
-            // Permission has already been granted
-//            generateMobileNumber()
         }
     }
 }

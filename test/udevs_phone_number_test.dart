@@ -7,13 +7,23 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockUdevsPhoneNumberPlatform
     with MockPlatformInterfaceMixin
     implements UdevsPhoneNumberPlatform {
-
   @override
   Future<String?> getPhoneNumber() => Future.value('42');
+
+  @override
+  Future<bool> hasPhonePermission() {
+    return Future.value(false);
+  }
+
+  @override
+  Future<void> requestPhonePermission() {
+    return Future.value();
+  }
 }
 
 void main() {
-  final UdevsPhoneNumberPlatform initialPlatform = UdevsPhoneNumberPlatform.instance;
+  final UdevsPhoneNumberPlatform initialPlatform =
+      UdevsPhoneNumberPlatform.instance;
 
   test('$MethodChannelUdevsPhoneNumber is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelUdevsPhoneNumber>());

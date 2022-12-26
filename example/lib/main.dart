@@ -28,9 +28,16 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
+    await _udevsPhoneNumberPlugin.requestPhonePermission();
     try {
-      platformVersion = await _udevsPhoneNumberPlugin.getPhoneNumber() ??
-          'Unknown platform version';
+      if (await _udevsPhoneNumberPlugin.hasPhonePermission()) {
+        platformVersion =
+            await _udevsPhoneNumberPlugin.getPhoneNumber() ?? "No phone number";
+      } else {
+        await _udevsPhoneNumberPlugin.requestPhonePermission();
+        platformVersion =
+            await _udevsPhoneNumberPlugin.getPhoneNumber() ?? "No phone number";
+      }
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
