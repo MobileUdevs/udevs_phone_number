@@ -1,64 +1,55 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:udevs_phone_number/src.dart';
 
-import 'package:flutter/services.dart';
-import 'package:udevs_phone_number/udevs_phone_number.dart';
+void main() => runApp(const MyApp());
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _udevsPhoneNumberPlugin = UdevsPhoneNumber();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    await _udevsPhoneNumberPlugin.requestPhonePermission();
-    try {
-      if (await _udevsPhoneNumberPlugin.hasPhonePermission()) {
-        platformVersion =
-            await _udevsPhoneNumberPlugin.getPhoneNumber() ?? "No phone number";
-      } else {
-        await _udevsPhoneNumberPlugin.requestPhonePermission();
-        platformVersion =
-            await _udevsPhoneNumberPlugin.getPhoneNumber() ?? "No phone number";
-      }
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Demo',
+      themeMode: ThemeMode.light,
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        appBar: AppBar(title: const Text('Demo')),
+        body: const HomePage(),
       ),
     );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController controller = TextEditingController();
+  String initialCountry = 'NG';
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          PhoneNumberWidget(),
+        ],
+      ),
+    );
+  }
+
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

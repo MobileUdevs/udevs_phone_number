@@ -5,8 +5,7 @@
 import 'dart:html' as html show window;
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-
-import 'udevs_phone_number_platform_interface.dart';
+import 'package:udevs_phone_number/src/plugin/udevs_phone_number_platform_interface.dart';
 
 /// A web implementation of the UdevsPhoneNumberPlatform of the UdevsPhoneNumber plugin.
 class UdevsPhoneNumberWeb extends UdevsPhoneNumberPlatform {

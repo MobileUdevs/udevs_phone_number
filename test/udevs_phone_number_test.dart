@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:udevs_phone_number/udevs_phone_number.dart';
-import 'package:udevs_phone_number/udevs_phone_number_platform_interface.dart';
-import 'package:udevs_phone_number/udevs_phone_number_method_channel.dart';
+import 'package:udevs_phone_number/src/plugin/udevs_phone_number.dart';
+import 'package:udevs_phone_number/src/plugin/udevs_phone_number_platform_interface.dart';
+import 'package:udevs_phone_number/src/plugin/udevs_phone_number_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockUdevsPhoneNumberPlatform
